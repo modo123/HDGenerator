@@ -58,6 +58,7 @@ namespace LangSystem_Generator
 
         public static void generateDataBase(bool update)
         {
+            #region TworzenieFilii
             // Na podstawie tych dwóch list będziemy tworzyć adres XD
             List<string> streets = File.ReadAllLines(Streets).ToList();
             List<string> cities = File.ReadAllLines(Cities).ToList();
@@ -73,8 +74,13 @@ namespace LangSystem_Generator
 
                 counter++;
             }
+            #endregion
+
+            #region TworzenieMożeAudyt
 
 
+
+            #endregion
 
             writeDataBase(false);
         }

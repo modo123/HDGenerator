@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Models\Database\Audit.cs" />
     <Compile Include="Models\Database\Buisness.cs" />
+    <Compile Include="Models\Database\CanAudit.cs" />
     <Compile Include="Models\Database\Course.cs" />
     <Compile Include="Models\Database\Department.cs" />
     <Compile Include="Models\Database\Language.cs" />
