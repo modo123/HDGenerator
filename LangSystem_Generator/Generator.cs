@@ -27,6 +27,7 @@ namespace LangSystem_Generator
             "Francuski",
             "Rosyjski"
         };
+
         private static readonly List<string> Departments = new List<string>
         {
             "Warszawa 01-464",
@@ -51,13 +52,33 @@ namespace LangSystem_Generator
             "WRO"
         };
 
+        private static readonly List<string> IDLanguages = new List<string>
+        {
+            "ANG",
+            "NMC",
+            "WLO",
+            "NOR",
+            "HSP",
+            "FRA",
+            "ROS"
+        };
+
+        private static readonly List<string> Type = new List<string>
+        {
+            "Ogolny",
+            "Profilowany"
+        };
+
         private static readonly string DataBaseBulkPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location);
 
         private static List<Department> departments = new List<Department>();
         private static List<CanAudit> canAudits = new List<CanAudit>();
+        private static List<Audit> audits = new List<Audit>();
 
         public static void generateDataBase(bool update)
         {
+            Random _rand = new Random();
+
             if (!update)
             {
                 #region GenerowanieFilii
@@ -66,7 +87,7 @@ namespace LangSystem_Generator
                 List<string> cities = File.ReadAllLines(Cities).ToList();
 
                 int counter = 1;
-                Random _rand = new Random();
+                
                 foreach (string department in Departments)
                 {
                     string ID = IDOfDepartment[counter - 1].ToString() + "_" + counter.ToString();
@@ -101,11 +122,25 @@ namespace LangSystem_Generator
             int dayT2 = int.Parse(MainWindow.T2Date.Substring(0, 2));
             int monthT2 = int.Parse(MainWindow.T2Date.Substring(3, 2));
             int yearT2 = int.Parse(MainWindow.T2Date.Substring(6, 4));
-            
+
+            Tuple<int, int, int> date0 = Tuple.Create(2003, 1, 1);
+            Tuple<int, int, int> date1 = Tuple.Create(yearT1, monthT1, dayT1);
+            Tuple<int, int, int> date2 = Tuple.Create(yearT2, monthT2, dayT2);
+
+            for (int i = 0; i < MainWindow.numOfAudits; i++ )
+            {
+                var date = Utilities.GeneratedDate(date0, date1);
+                string dateS = date.Item1.ToString() + "." + date.Item2.ToString() + "." + date.Item3.ToString();
+                string auditID = "AUD_" + IDLanguages[_rand.Next(0, 7)] + "_" + date.Item2.ToString() + "_" + i.ToString();
+                int price = _rand.Next(500, 10000);
+                string type = Type[_rand.Next(0, 1)];
+                audits.Add(new Audit(auditID, price, dateS, type));
+            }
+
 
             #endregion
 
-            writeDataBase(false);
+                writeDataBase(false);
         }
 
         private static void writeDataBase(bool update)
@@ -123,7 +158,11 @@ namespace LangSystem_Generator
             //Tabela możeAudyt - 
             using (var mozeAudyt = new StreamWriter(DataBaseBulkPath + @"\MozeAudyt" + (update ? "Update" : "") + ".bulk"))
                 foreach (CanAudit canAudit in canAudits)
-                    mozeAudyt.WriteLine(canAudit.DepartmentNr.ToString()+ " | " +canAudit.Name.ToString());
+                    mozeAudyt.WriteLine(canAudit.DepartmentNr.ToString() + " | " + canAudit.Name.ToString());
+            //Tabela Audyt
+            using (var audyt = new StreamWriter(DataBaseBulkPath + @"\Audyt" + (update ? "Update" : "") + ".bulk"))
+                foreach (Audit audit in audits)
+                    audyt.WriteLine(audit.AuditNr.ToString() + " | " + audit.Date.ToString() + " | " + audit.Price.ToString() + " | " + audit.Type.ToString());
 
         }
 

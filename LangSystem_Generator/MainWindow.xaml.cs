@@ -28,6 +28,13 @@ namespace LangSystem_Generator
         public static string T1Date;
         public static string T2Date;
 
+        public static int numOfLectors;
+        public static int numofDepartaments;
+        public static int numOfBusiness;
+        public static int numOfAudits;
+        public static int numOfCourses;
+        public static int numOfLanguages;
+
      
         public void Generate_Click(object sender, RoutedEventArgs e)
         {
@@ -35,6 +42,8 @@ namespace LangSystem_Generator
             //string typeOfData = ToGenerate.Text;
             T1Date = T1.Text;
             T2Date = T2.Text;
+
+            numOfAudits = int.Parse(NumOfAudits.Text);
 
             Generator.generateDataBase(false);
         }
