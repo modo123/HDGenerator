@@ -30,27 +30,53 @@ namespace LangSystem_Generator
         };
         private static readonly List<string> Departments = new List<string>
         {
-            "Warszawa",
-            "Gdańsk",
-            "Łódź",
-            "Kraków",
-            "Lublin",
-            "Szczecin",
-            "Poznań",
-            "Wrocław"
+            "Warszawa 01-464",
+            "Gdańsk 80-761",
+            "Łódź  90-001",
+            "Kraków 31-403",
+            "Lublin 20-218",
+            "Szczucin 33-230",
+            "Poznań  60-967",
+            "Wrocław 51-416"
+        };
+
+        private static readonly List<string> IDOfDepartment = new List<string>
+        {
+            "WAW",
+            "GDA",
+            "LDZ",
+            "KRK",
+            "LBL",
+            "SZC",
+            "POZ",
+            "WRO"
         };
 
         private static readonly string DataBaseBulkPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location);
+
+        private static List<Department> departments = new List<Department>();
 
         public static void generateDataBase(bool update)
         {
             // Na podstawie tych dwóch list będziemy tworzyć adres XD
             List<string> streets = File.ReadAllLines(Streets).ToList();
-            List<string> cities = File.ReadAllLines(Streets).ToList();
+            List<string> cities = File.ReadAllLines(Cities).ToList();
 
-            List<Department> departments = new List<Department>();
+            int counter = 1;
+            Random _rand = new Random();
+            foreach( string department in Departments)
+            {
+                string ID = IDOfDepartment[counter - 1].ToString() + "_" + counter.ToString();
+                string adress = Departments[counter - 1].ToString() + ", " + streets[_rand.Next(0, streets.Count())].ToString() + " " + _rand.Next(1, 513).ToString();
 
-            
+                departments.Add(new Department(ID, adress));
+
+                counter++;
+            }
+
+
+
+            writeDataBase(false);
         }
 
         private static void writeDataBase(bool update)
@@ -59,6 +85,10 @@ namespace LangSystem_Generator
             using (var jezyk = new StreamWriter(DataBaseBulkPath + @"\Jezyki" + (update ? "Update" : "") + ".bulk"))
                 foreach (string language in Languages)
                     jezyk.WriteLine(language);
+
+            using (var filia = new StreamWriter(DataBaseBulkPath + @"\Filie" + (update ? "Update" : "") + ".bulk"))
+                foreach (Department department in departments)
+                    filia.WriteLine(department.DepartmentNr.ToString() + " | " + department.Adress.ToString());
 
         }
 

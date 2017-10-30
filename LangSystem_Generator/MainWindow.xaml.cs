@@ -27,8 +27,8 @@ namespace LangSystem_Generator
 
         private void Generate_Click(object sender, RoutedEventArgs e)
         {
-            int numberDataToGenerate = int.Parse(NumberDataToGenerate.Text); // Wywala błą
-            string typeOfData = ToGenerate.Text;
+            //int numberDataToGenerate = int.Parse(NumberDataToGenerate.Text); // Wywala błąd kiedy nie wpisze się liczby tylko zostawi wartość domyślną
+            //string typeOfData = ToGenerate.Text;
             Generator.generateDataBase(false);
         }
     }
