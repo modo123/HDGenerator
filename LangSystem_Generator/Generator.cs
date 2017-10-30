@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using LangSystem_Generator.Models.Database;
 
 
 namespace LangSystem_Generator
@@ -29,17 +30,16 @@ namespace LangSystem_Generator
         };
         private static readonly List<string> Departments = new List<string>
         {
-            "Warszawa",
-            "Gdańsk",
-            "Łódź",
-            "Kraków",
-            "Lublin",
-            "Szczecin",
-            "Poznań",
-            "Wrocław"
+            "Warszawa 01-464",
+            "Gdańsk 80-761",
+            "Łódź  90-001",
+            "Kraków 31-403",
+            "Lublin 20-218",
+            "Szczucin 70-004",
+            "Poznań  60-967",
+            "Wrocław 51-416"
         };
 
-<<<<<<< HEAD
         private static readonly List<string> IDOfDepartment = new List<string>
         {
             "WAW",
@@ -55,6 +55,7 @@ namespace LangSystem_Generator
         private static readonly string DataBaseBulkPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location);
 
         private static List<Department> departments = new List<Department>();
+        private static List<CanAudit> canAudits = new List<CanAudit>();
 
         public static void generateDataBase(bool update)
         {
@@ -78,11 +79,20 @@ namespace LangSystem_Generator
 
             #region TworzenieMożeAudyt
 
+            for (int i = 0; i < departments.Count(); i++ )
+            {
+                int nrOfLanguages = _rand.Next(0, 7);
 
-
+                for(int j = 0; j < nrOfLanguages; j++)
+                    canAudits.Add(new CanAudit(departments[i].DepartmentNr, Languages[j]));               
+               
+            }
+           
             #endregion
 
-            writeDataBase(false);
+
+
+                writeDataBase(false);
         }
 
         private static void writeDataBase(bool update)
@@ -97,11 +107,13 @@ namespace LangSystem_Generator
                 foreach (Department department in departments)
                     filia.WriteLine(department.DepartmentNr.ToString() + " | " + department.Adress.ToString());
 
+            //Tabela możeAudyt - 
+            using (var mozeAudyt = new StreamWriter(DataBaseBulkPath + @"\MozeAudyt" + (update ? "Update" : "") + ".bulk"))
+                foreach (CanAudit canAudit in canAudits)
+                    mozeAudyt.WriteLine(canAudit.DepartmentNr.ToString()+ " | " +canAudit.Name.ToString());
+
         }
 
-=======
-        //private static void
->>>>>>> origin/Dawid
-
+        
     }
 }

@@ -23,16 +23,13 @@ namespace LangSystem_Generator
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void Generate(object sender, RoutedEventArgs e)
+        }        
+     
+        private void Generate_Click(object sender, RoutedEventArgs e)
         {
-        
-        }
-       // private void Generate_Click(object sender, RoutedEventArgs e)
-       // {
             //int numberDataToGenerate = int.Parse(NumberDataToGenerate.Text);
             //string typeOfData = ToGenerate.Text;
-        //}
+            Generator.generateDataBase(false);
+        }
     }
 }
