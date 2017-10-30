@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using LangSystem_Generator.Models.Database;
 
 
 namespace LangSystem_Generator
@@ -30,16 +29,17 @@ namespace LangSystem_Generator
         };
         private static readonly List<string> Departments = new List<string>
         {
-            "Warszawa 01-464",
-            "Gdańsk 80-761",
-            "Łódź  90-001",
-            "Kraków 31-403",
-            "Lublin 20-218",
-            "Szczucin 70-004",
-            "Poznań  60-967",
-            "Wrocław 51-416"
+            "Warszawa",
+            "Gdańsk",
+            "Łódź",
+            "Kraków",
+            "Lublin",
+            "Szczecin",
+            "Poznań",
+            "Wrocław"
         };
 
+<<<<<<< HEAD
         private static readonly List<string> IDOfDepartment = new List<string>
         {
             "WAW",
@@ -99,7 +99,9 @@ namespace LangSystem_Generator
 
         }
 
+=======
+        //private static void
+>>>>>>> origin/Dawid
 
-        
     }
 }

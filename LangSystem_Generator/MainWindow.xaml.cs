@@ -25,11 +25,14 @@ namespace LangSystem_Generator
             InitializeComponent();
         }
 
-        private void Generate_Click(object sender, RoutedEventArgs e)
+        private void Generate(object sender, RoutedEventArgs e)
         {
-            //int numberDataToGenerate = int.Parse(NumberDataToGenerate.Text); // Wywala błąd kiedy nie wpisze się liczby tylko zostawi wartość domyślną
-            //string typeOfData = ToGenerate.Text;
-            Generator.generateDataBase(false);
+        
         }
+       // private void Generate_Click(object sender, RoutedEventArgs e)
+       // {
+            //int numberDataToGenerate = int.Parse(NumberDataToGenerate.Text);
+            //string typeOfData = ToGenerate.Text;
+        //}
     }
 }

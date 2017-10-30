@@ -4,16 +4,21 @@
 winexe
 C#
 .cs
-E:\Semestr V Aplikacje\Hurtowanie Danych\Zadanie_2\LangSystem\HDGenerator\LangSystem_Generator\obj\Debug\
+C:\Users\ruchn\Desktop\Generatory\by Paulina\LangSystem_Generator\obj\Debug\
 LangSystem_Generator
 none
 false
 DEBUG;TRACE
-E:\Semestr V Aplikacje\Hurtowanie Danych\Zadanie_2\LangSystem\HDGenerator\LangSystem_Generator\App.xaml
+C:\Users\ruchn\Desktop\Generatory\by Paulina\LangSystem_Generator\App.xaml
 11151548125
 
+<<<<<<< HEAD
 171744824379
 12-354110402
+=======
+161480768574
+12-1401562060
+>>>>>>> origin/Dawid
 MainWindow.xaml;
 
 False
