@@ -35,7 +35,7 @@ namespace LangSystem_Generator
             "Łódź  90-001",
             "Kraków 31-403",
             "Lublin 20-218",
-            "Szczucin 33-230",
+            "Szczucin 70-004",
             "Poznań  60-967",
             "Wrocław 51-416"
         };
@@ -86,6 +86,7 @@ namespace LangSystem_Generator
                 foreach (string language in Languages)
                     jezyk.WriteLine(language);
 
+            // Tabela filie - działa pięknie :D
             using (var filia = new StreamWriter(DataBaseBulkPath + @"\Filie" + (update ? "Update" : "") + ".bulk"))
                 foreach (Department department in departments)
                     filia.WriteLine(department.DepartmentNr.ToString() + " | " + department.Adress.ToString());
