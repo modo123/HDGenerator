@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using LangSystem_Generator.Models.Database;
 
-
 namespace LangSystem_Generator
 {
     class Generator
@@ -59,40 +58,54 @@ namespace LangSystem_Generator
 
         public static void generateDataBase(bool update)
         {
-            #region TworzenieFilii
-            // Na podstawie tych dwóch list będziemy tworzyć adres XD
-            List<string> streets = File.ReadAllLines(Streets).ToList();
-            List<string> cities = File.ReadAllLines(Cities).ToList();
-
-            int counter = 1;
-            Random _rand = new Random();
-            foreach( string department in Departments)
+            if (!update)
             {
-                string ID = IDOfDepartment[counter - 1].ToString() + "_" + counter.ToString();
-                string adress = Departments[counter - 1].ToString() + ", " + streets[_rand.Next(0, streets.Count())].ToString() + " " + _rand.Next(1, 513).ToString();
+                #region GenerowanieFilii
+                // Na podstawie tych dwóch list będziemy tworzyć adres XD
+                List<string> streets = File.ReadAllLines(Streets).ToList();
+                List<string> cities = File.ReadAllLines(Cities).ToList();
 
-                departments.Add(new Department(ID, adress));
+                int counter = 1;
+                Random _rand = new Random();
+                foreach (string department in Departments)
+                {
+                    string ID = IDOfDepartment[counter - 1].ToString() + "_" + counter.ToString();
+                    string adress = Departments[counter - 1].ToString() + ", " + streets[_rand.Next(0, streets.Count())].ToString() + " " + _rand.Next(1, 513).ToString();
 
-                counter++;
+                    departments.Add(new Department(ID, adress));
+
+                    counter++;
+                }
+                #endregion
+
+                #region GenerowanieMożeAudyt
+
+                for (int i = 0; i < departments.Count(); i++)
+                {
+                    int nrOfLanguages = _rand.Next(0, 7);
+
+                    for (int j = 0; j < nrOfLanguages; j++)
+                        canAudits.Add(new CanAudit(departments[i].DepartmentNr, Languages[j]));
+
+                }
+
+                #endregion
             }
+
+            #region GenerowanieDat
+
+            int dayT1 = int.Parse(MainWindow.T1Date.Substring(0, 2));
+            int monthT1 = int.Parse(MainWindow.T1Date.Substring(3, 2));
+            int yearT1 = int.Parse(MainWindow.T1Date.Substring(6, 4));
+
+            int dayT2 = int.Parse(MainWindow.T2Date.Substring(0, 2));
+            int monthT2 = int.Parse(MainWindow.T2Date.Substring(3, 2));
+            int yearT2 = int.Parse(MainWindow.T2Date.Substring(6, 4));
+            
+
             #endregion
 
-            #region TworzenieMożeAudyt
-
-            for (int i = 0; i < departments.Count(); i++ )
-            {
-                int nrOfLanguages = _rand.Next(0, 7);
-
-                for(int j = 0; j < nrOfLanguages; j++)
-                    canAudits.Add(new CanAudit(departments[i].DepartmentNr, Languages[j]));               
-               
-            }
-           
-            #endregion
-
-
-
-                writeDataBase(false);
+            writeDataBase(false);
         }
 
         private static void writeDataBase(bool update)
@@ -114,6 +127,8 @@ namespace LangSystem_Generator
 
         }
 
-        
+
+
+      
     }
 }

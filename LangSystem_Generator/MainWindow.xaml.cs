@@ -23,12 +23,19 @@ namespace LangSystem_Generator
         public MainWindow()
         {
             InitializeComponent();
-        }        
+        } 
+       
+        public static string T1Date;
+        public static string T2Date;
+
      
-        private void Generate_Click(object sender, RoutedEventArgs e)
+        public void Generate_Click(object sender, RoutedEventArgs e)
         {
             //int numberDataToGenerate = int.Parse(NumberDataToGenerate.Text);
             //string typeOfData = ToGenerate.Text;
+            T1Date = T1.Text;
+            T2Date = T2.Text;
+
             Generator.generateDataBase(false);
         }
     }
