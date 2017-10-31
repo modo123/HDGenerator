@@ -19,9 +19,9 @@
 
         <Label Content="Okresy czasu" HorizontalAlignment="Left" Margin="275,38,0,0" VerticalAlignment="Top" Height="30" />
         <Label Content="T1" HorizontalAlignment="Left" Margin="250,75,0,0" VerticalAlignment="Top" Width="25" Height="30" />
-        <TextBox x:Name="T1" HorizontalAlignment="Left" Margin="275,75,0,0" VerticalAlignment="Top" Width="100" Height="30" Text="31.12.2008" />
+        <TextBox x:Name="T1" HorizontalAlignment="Left" Margin="275,75,0,0" VerticalAlignment="Top" Width="100" Height="30" Text="01.01.2005" SpellCheck.IsEnabled="True" />
         <Label Content="T2" HorizontalAlignment="Left" Margin="250,125,0,0" VerticalAlignment="Top" Width="25" Height="30" />
-        <TextBox x:Name="T2" HorizontalAlignment="Left" Margin="275,125,0,0" VerticalAlignment="Top" Width="100" Height="30" Text="DD.MM.RRRR" />
+        <TextBox x:Name="T2" HorizontalAlignment="Left" Margin="275,125,0,0" VerticalAlignment="Top" Width="100" Height="30" Text="31.12.2017"  />
 
         <Label Content="Zaktualizowane Dane" HorizontalAlignment="Left" Margin="475,8,0,0" VerticalAlignment="Top" Height="30" />
         <Label x:Name="Lectors2" Content="Lektorzy" HorizontalAlignment="Left" Margin="450,45,0,0" VerticalAlignment="Top" Width="75" Height="30" />
@@ -37,7 +37,8 @@
         <TextBox x:Name="NumOfCourses2" HorizontalAlignment="Left" Margin="525,185,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumOfLanguages2" HorizontalAlignment="Left" Margin="525,220,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
 
-        <Button x:Name="generate" Content="Generuj" HorizontalAlignment="Left" Margin="275,250,0,0" Width="125" Height="50" Click="Generate_Click"/>
+        <Button x:Name="generate" Content="Generuj" Margin="500,281,56,39" Height="50" Click="Generate_Click"/>
+        <Label x:Name="InfoLabel" Content="" HorizontalAlignment="Left" Margin="50,290,0,0" VerticalAlignment="Top" Width="325" Height="41" FontSize="14"/>
     </Grid>
-    
+
 </Window>

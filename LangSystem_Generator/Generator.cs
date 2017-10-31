@@ -227,9 +227,7 @@ namespace LangSystem_Generator
 
                 #endregion
 
-
-
-                    writeDataBase(false);
+                writeDataBase(false);
 
             }
             #endregion
