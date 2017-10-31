@@ -104,6 +104,8 @@ namespace LangSystem_Generator
             List<string> cities = File.ReadAllLines(Cities).ToList();
             List<string> buisnessNames = File.ReadAllLines(BuisnessNames).ToList();
             List<string> tradehNames = File.ReadAllLines(TradehNames).ToList();
+            List<string> firstNames = File.ReadAllLines(FirstNames).ToList();
+            List<string> lastNames = File.ReadAllLines(LastNames).ToList();
 
             int auditCounter = 0;
 
@@ -159,9 +161,6 @@ namespace LangSystem_Generator
                 #region GenerowanieLektora
                 for (int i = 0; i < MainWindow.numOfLectors; i++ )
                 {
-                    List<string> firstNames = File.ReadAllLines(FirstNames).ToList();
-                    List<string> lastNames = File.ReadAllLines(LastNames).ToList();
-
                     long PESEL = Utilities.PESELGenerator();
                     string firstName = firstNames[_rand.Next(0, firstNames.Count())];
                     string lastName = lastNames[_rand.Next(0, lastNames.Count())];
@@ -198,6 +197,8 @@ namespace LangSystem_Generator
 
                 foreach (Audit audit in audits)
                 {
+                    if (MainWindow.numOfCourses == 0)
+                        break;
                     counter = _rand.Next() % 4;
                     bool end = false;
 
@@ -220,10 +221,7 @@ namespace LangSystem_Generator
                         if(end)
                             break;
                     }
-
                 }
-
-
 
                 #endregion
 
@@ -254,9 +252,6 @@ namespace LangSystem_Generator
                 #region GenerowanieLektora2
                 for (int i = 0; i < MainWindow.numOfLectors2; i++)
                 {
-                    List<string> firstNames = File.ReadAllLines(FirstNames).ToList();
-                    List<string> lastNames = File.ReadAllLines(LastNames).ToList();
-
                     long PESEL = Utilities.PESELGenerator();
                     string firstName = firstNames[_rand.Next(0, firstNames.Count())];
                     string lastName = lastNames[_rand.Next(0, lastNames.Count())];
@@ -272,7 +267,7 @@ namespace LangSystem_Generator
                 // NIP nie działa 
                 #region GenerowanieFirm2
 
-                for (int i = 0; i < MainWindow.numOfBusiness; i++)
+                for (int i = 0; i < MainWindow.numOfBusiness2; i++)
                 {
                     string NIP = Utilities.NIPGenerator();
                     string name = buisnessNames[_rand.Next(0, buisnessNames.Count())];
@@ -292,6 +287,8 @@ namespace LangSystem_Generator
 
                 foreach (Audit audit in audits)
                 {
+                    if (MainWindow.numOfCourses2 == 0)
+                        break;
                     int counter = _rand.Next() % 4;
                     bool end = false;
 
@@ -304,8 +301,8 @@ namespace LangSystem_Generator
 
                         courses.Add(new Course(courseID, language, numOfStudents, status));
 
-                        MainWindow.numOfCourses--;
-                        if (MainWindow.numOfCourses == 0)
+                        MainWindow.numOfCourses2--;
+                        if (MainWindow.numOfCourses2 == 0)
                         {
                             end = true;
                             break;

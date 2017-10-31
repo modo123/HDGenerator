@@ -115,7 +115,7 @@ namespace LangSystem_Generator
                 return false;
             if (!int.TryParse(NumOfLectors.Text, out numOfLectors))
                 return false;
-            if (!int.TryParse(NumOfLectors2.Text, out numOfLectors))
+            if (!int.TryParse(NumOfLectors2.Text, out numOfLectors2))
                 return false;
             if (!int.TryParse(NumofDepartaments.Text, out numofDepartaments))
                 return false;
