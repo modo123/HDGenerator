@@ -84,6 +84,8 @@ namespace LangSystem_Generator
         private static List<Course> courses = new List<Course>();
         private static List<Buisness> buisnesses = new List<Buisness>();
 
+        protected static int auditCounter = 0;
+
         public static void generateDataBase(bool update)
         {
             Random _rand = new Random(new System.DateTime().Millisecond);
@@ -107,7 +109,7 @@ namespace LangSystem_Generator
             List<string> firstNames = File.ReadAllLines(FirstNames).ToList();
             List<string> lastNames = File.ReadAllLines(LastNames).ToList();
 
-            int auditCounter = 0;
+            int counter = 1;
 
             #region T1
             if (!update)
@@ -115,9 +117,6 @@ namespace LangSystem_Generator
                 #region GenerowanieFilii
                 // Na podstawie tych dwóch list będziemy tworzyć adres XD
                 
-
-                int counter = 1;
-
                 foreach (string department in Departments)
                 {
                     string ID = IDOfDepartment[counter - 1].ToString() + "_" + counter.ToString();
@@ -196,30 +195,17 @@ namespace LangSystem_Generator
                 #region GenerowanieKursów
 
                 foreach (Audit audit in audits)
-                {
-                    if (MainWindow.numOfCourses == 0)
-                        break;
+                {                    
                     counter = _rand.Next() % 4;
-                    bool end = false;
 
-                    for(int i = 0 ; i < counter; i++)
+                    for (int i = 1; i <= counter; i++)
                     {
-                        string courseID = audit.AuditNr + "_K" + i+1.ToString();
+                        string courseID = audit.AuditNr + "_K" + i.ToString();
                         string language = Languages[_rand.Next(0, Languages.Count())];
                         int numOfStudents = _rand.Next(5, 550);
                         string status = Status[_rand.Next() % 2];
 
                         courses.Add(new Course(courseID, language, numOfStudents, status));
-
-                        MainWindow.numOfCourses--;
-                        if(MainWindow.numOfCourses == 0)
-                        {
-                            end = true;
-                            break;
-                        }
-
-                        if(end)
-                            break;
                     }
                 }
 
@@ -236,7 +222,7 @@ namespace LangSystem_Generator
                 // Smuteczek generowanie daty nie działa poprawnie :( 
                 #region GenerowanieAudytu2               
 
-                for (int i = 0; i < MainWindow.numOfAudits; i++)
+                for (int i = 0; i < MainWindow.numOfAudits2; i++)
                 {                   
                     var date = Utilities.GeneratedDate(date1, date2);
                     string dateS = date.Item1.ToString() + "." + date.Item2.ToString() + "." + date.Item3.ToString();
@@ -285,32 +271,20 @@ namespace LangSystem_Generator
 
                 #region GenerowanieKursów
 
-                foreach (Audit audit in audits)
-                {
-                    if (MainWindow.numOfCourses2 == 0)
-                        break;
-                    int counter = _rand.Next() % 4;
-                    bool end = false;
+               foreach (Audit audit in audits)
+                {                    
+                    counter = _rand.Next() % 4;                  
 
-                    for (int i = 0; i < counter; i++)
+                    for(int i = 1 ; i <= counter; i++)
                     {
-                        string courseID = audit.AuditNr + "_K" + i+1.ToString();
+                        string courseID = audit.AuditNr + "_K" + i.ToString();
                         string language = Languages[_rand.Next(0, Languages.Count())];
                         int numOfStudents = _rand.Next(5, 550);
                         string status = Status[_rand.Next() % 2];
 
                         courses.Add(new Course(courseID, language, numOfStudents, status));
-
-                        MainWindow.numOfCourses2--;
-                        if (MainWindow.numOfCourses2 == 0)
-                        {
-                            end = true;
-                            break;
-                        }
-
-                        if (end)
-                            break;
                     }
+               
 
                 }
                 #endregion

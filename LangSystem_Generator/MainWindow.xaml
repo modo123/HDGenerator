@@ -8,14 +8,12 @@
         <Label x:Name="Departament" Content="Oddziały" HorizontalAlignment="Left" Margin="25,80,0,0" VerticalAlignment="Top" Width="75" Height="30" />
         <Label x:Name="Business" Content="Firmy" HorizontalAlignment="Left" Margin="25,115,0,0" VerticalAlignment="Top" Width="75" Height="30" />
         <Label x:Name="Audit" Content="Audyty" HorizontalAlignment="Left" Margin="25,150,0,0" VerticalAlignment="Top" Width="75" Height="30" />
-        <Label x:Name="Course" Content="Kursy" HorizontalAlignment="Left" Margin="25,185,0,0" VerticalAlignment="Top" Width="75" Height="30" />
-        <Label x:Name="Language" Content="Języki" HorizontalAlignment="Left" Margin="25,220,0,0" VerticalAlignment="Top" Width="75" Height="30" />
+        <Label x:Name="Language" Content="Języki" HorizontalAlignment="Left" Margin="25,194,0,0" VerticalAlignment="Top" Width="75" Height="30" />
         <TextBox x:Name="NumOfLectors" HorizontalAlignment="Left" Margin="110,45,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumofDepartaments" HorizontalAlignment="Left" Margin="110,80,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumOfBusiness" HorizontalAlignment="Left" Margin="110,115,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumOfAudits" HorizontalAlignment="Left" Margin="110,150,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
-        <TextBox x:Name="NumOfCourses" HorizontalAlignment="Left" Margin="110,185,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
-        <TextBox x:Name="NumOfLanguages" HorizontalAlignment="Left" Margin="110,220,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
+        <TextBox x:Name="NumOfLanguages" HorizontalAlignment="Left" Margin="110,194,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
 
         <Label Content="Okresy czasu" HorizontalAlignment="Left" Margin="275,38,0,0" VerticalAlignment="Top" Height="30" />
         <Label Content="T1" HorizontalAlignment="Left" Margin="250,75,0,0" VerticalAlignment="Top" Width="25" Height="30" />
@@ -28,17 +26,15 @@
         <Label x:Name="Departament2" Content="Oddziały" HorizontalAlignment="Left" Margin="450,80,0,0" VerticalAlignment="Top" Width="75" Height="30" />
         <Label x:Name="Business2" Content="Firmy" HorizontalAlignment="Left" Margin="450,115,0,0" VerticalAlignment="Top" Width="75" Height="30" />
         <Label x:Name="Audit2" Content="Audyty" HorizontalAlignment="Left" Margin="450,150,0,0" VerticalAlignment="Top" Width="75" Height="30" />
-        <Label x:Name="Course2" Content="Kursy" HorizontalAlignment="Left" Margin="450,185,0,0" VerticalAlignment="Top" Width="75" Height="30" />
-        <Label x:Name="Language2" Content="Języki" HorizontalAlignment="Left" Margin="450,220,0,0" VerticalAlignment="Top" Width="75" Height="30" />
+        <Label x:Name="Language2" Content="Języki" HorizontalAlignment="Left" Margin="450,190,0,0" VerticalAlignment="Top" Width="75" Height="30" />
         <TextBox x:Name="NumOfLectors2" HorizontalAlignment="Left" Margin="525,45,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumofDepartaments2" HorizontalAlignment="Left" Margin="525,80,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumOfBusiness2" HorizontalAlignment="Left" Margin="525,115,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumOfAudits2" HorizontalAlignment="Left" Margin="525,150,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
-        <TextBox x:Name="NumOfCourses2" HorizontalAlignment="Left" Margin="525,185,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
-        <TextBox x:Name="NumOfLanguages2" HorizontalAlignment="Left" Margin="525,220,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
+        <TextBox x:Name="NumOfLanguages2" HorizontalAlignment="Left" Margin="525,190,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
 
-        <Button x:Name="generate" Content="Generuj" Margin="500,281,56,39" Height="50" Click="Generate_Click"/>
-        <Label x:Name="InfoLabel" Content="" HorizontalAlignment="Left" Margin="50,290,0,0" VerticalAlignment="Top" Width="325" Height="41" FontSize="14"/>
+        <Button x:Name="generate" Content="Generuj" Margin="525,243,40,89" Click="Generate_Click"/>
+        <Label x:Name="InfoLabel" Content="" HorizontalAlignment="Left" Margin="50,259,0,0" VerticalAlignment="Top" Width="350" Height="75" FontSize="24" TextOptions.TextHintingMode="Animated"/>
     </Grid>
 
 </Window>

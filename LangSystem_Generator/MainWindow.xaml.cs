@@ -47,9 +47,11 @@ namespace LangSystem_Generator
         {
             if (!StartupCheck())
             {
+                InfoLabel.FontSize = 14;
                 InfoLabel.Content = "Wystąpił błąd :( Problem z podanymi danymi";
                 return;
             }
+            InfoLabel.FontSize = 26;
             Task.Run(() =>
             {
                 Dispatcher.Invoke(
@@ -63,8 +65,6 @@ namespace LangSystem_Generator
                         NumOfLectors2.IsEnabled = false;
                         NumofDepartaments.IsEnabled = false;
                         NumofDepartaments2.IsEnabled = false;
-                        NumOfCourses.IsEnabled = false;
-                        NumOfCourses2.IsEnabled = false;
                         NumOfLanguages.IsEnabled = false;
                         NumOfLanguages2.IsEnabled = false;
                         generate.IsEnabled = false;
@@ -76,7 +76,7 @@ namespace LangSystem_Generator
                
                 Generator.generateDataBase(false);
                 Generator.generateDataBase(true);
-
+          
                 Dispatcher.Invoke(
                     () =>
                     {
@@ -88,8 +88,6 @@ namespace LangSystem_Generator
                         NumOfLectors2.IsEnabled = true;
                         NumofDepartaments.IsEnabled = true;
                         NumofDepartaments2.IsEnabled = true;
-                        NumOfCourses.IsEnabled = true;
-                        NumOfCourses2.IsEnabled = true;
                         NumOfLanguages.IsEnabled = true;
                         NumOfLanguages2.IsEnabled = true;
                         generate.IsEnabled = true;
@@ -120,10 +118,6 @@ namespace LangSystem_Generator
             if (!int.TryParse(NumofDepartaments.Text, out numofDepartaments))
                 return false;
             if (!int.TryParse(NumofDepartaments2.Text, out numofDepartaments2))
-                return false;
-            if (!int.TryParse(NumOfCourses.Text, out numOfCourses))
-                return false;
-            if (!int.TryParse(NumOfCourses2.Text, out numOfCourses2))
                 return false;
             if (!int.TryParse(NumOfLanguages.Text, out numOfLanguages))
                 return false;
