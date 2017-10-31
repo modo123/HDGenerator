@@ -35,6 +35,13 @@ namespace LangSystem_Generator
         public static int numOfCourses;
         public static int numOfLanguages;
 
+        public static int numOfLectors2;
+        public static int numofDepartaments2;
+        public static int numOfBusiness2;
+        public static int numOfAudits2;
+        public static int numOfCourses2;
+        public static int numOfLanguages2;
+
      
         public void Generate_Click(object sender, RoutedEventArgs e)
         {
@@ -44,8 +51,26 @@ namespace LangSystem_Generator
             T2Date = T2.Text;
 
             numOfAudits = int.Parse(NumOfAudits.Text);
+            numOfAudits2 = int.Parse(NumOfAudits2.Text);
+
+            numOfLectors = int.Parse(NumOfLectors.Text);
+            numOfLectors2 = int.Parse(NumOfLectors2.Text);
+
+            numofDepartaments = int.Parse(NumofDepartaments.Text);
+            numofDepartaments2 = int.Parse(NumofDepartaments2.Text);
+
+            numOfBusiness = int.Parse(NumOfBusiness.Text);
+            numOfBusiness2 = int.Parse(NumOfBusiness2.Text);
+
+            numOfCourses = int.Parse(NumOfCourses.Text);
+            numOfCourses2 = int.Parse(NumOfCourses2.Text);
+
+            numOfLanguages = int.Parse(NumOfLanguages.Text);
+            numOfLanguages2 = int.Parse(NumOfLanguages2.Text);
+
 
             Generator.generateDataBase(false);
+            Generator.generateDataBase(true);
         }
     }
 }

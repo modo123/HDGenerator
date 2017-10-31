@@ -8,12 +8,12 @@ namespace LangSystem_Generator
 {
     class Utilities
     {
-
-
+        
         public static Tuple<int, int, int> GeneratedDate(Tuple<int, int, int> date1, Tuple<int, int, int> date2)
         {
-            Random _random = new Random();
-
+         
+            Random _random = new Random(); // ToDo - rand nie losuje :(
+            
             var rok = _random.Next(date1.Item1, date2.Item1);
             ////////////////////////////////////////////////////////
             int miesiac;
@@ -59,6 +59,32 @@ namespace LangSystem_Generator
             }
 
             return Tuple.Create(rok, miesiac, dzien);
+        }
+
+        public static long peselGenerator()
+        {
+            Random _random = new Random();
+            int year = _random.Next(62, 92);
+            int month = _random.Next(1, 12);
+            int day;
+            if(month == 2)
+                day = _random.Next(1,28);
+            else 
+                day = _random.Next(1,31);
+
+            int rest = _random.Next(10000, 99999);
+            string pesel;
+            if (month < 10)
+                pesel = year.ToString() + "0" + month.ToString();
+            else
+                pesel = year.ToString() + month.ToString();
+
+            if (day < 10)
+                pesel = pesel + "0" + day.ToString() + rest.ToString();
+            else
+                pesel = pesel + day.ToString() + rest.ToString();
+
+            return long.Parse(pesel);
         }
     }
 }

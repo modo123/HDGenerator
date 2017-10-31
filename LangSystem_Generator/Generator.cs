@@ -74,11 +74,26 @@ namespace LangSystem_Generator
         private static List<Department> departments = new List<Department>();
         private static List<CanAudit> canAudits = new List<CanAudit>();
         private static List<Audit> audits = new List<Audit>();
+        private static List<Lector> lectors = new List<Lector>();
+        private static List<Course> courses = new List<Course>();
+        private static List<Buisness> businesses = new List<Buisness>();
 
         public static void generateDataBase(bool update)
         {
-            Random _rand = new Random();
+            Random _rand = new Random(new System.DateTime().Millisecond);
 
+            int dayT1 = int.Parse(MainWindow.T1Date.Substring(0, 2));
+            int monthT1 = int.Parse(MainWindow.T1Date.Substring(3, 2));
+            int yearT1 = int.Parse(MainWindow.T1Date.Substring(6, 4));
+
+            int dayT2 = int.Parse(MainWindow.T2Date.Substring(0, 2));
+            int monthT2 = int.Parse(MainWindow.T2Date.Substring(3, 2));
+            int yearT2 = int.Parse(MainWindow.T2Date.Substring(6, 4));
+
+            Tuple<int, int, int> date0 = Tuple.Create(2003, 1, 1);
+            Tuple<int, int, int> date1 = Tuple.Create(yearT1, monthT1, dayT1);
+            Tuple<int, int, int> date2 = Tuple.Create(yearT2, monthT2, dayT2);
+            #region T1
             if (!update)
             {
                 #region GenerowanieFilii
@@ -87,7 +102,7 @@ namespace LangSystem_Generator
                 List<string> cities = File.ReadAllLines(Cities).ToList();
 
                 int counter = 1;
-                
+
                 foreach (string department in Departments)
                 {
                     string ID = IDOfDepartment[counter - 1].ToString() + "_" + counter.ToString();
@@ -111,63 +126,129 @@ namespace LangSystem_Generator
                 }
 
                 #endregion
+
+                // Smuteczek generowanie daty nie działa poprawnie :( 
+                #region GenerowanieAudytu
+
+                for (int i = 0; i < MainWindow.numOfAudits; i++)
+                {
+                    var date = Utilities.GeneratedDate(date0, date1);
+                    string dateS = date.Item1.ToString() + "." + date.Item2.ToString() + "." + date.Item3.ToString();
+                    string auditID = "AUD_" + IDLanguages[_rand.Next(0, 7)] + "_" + date.Item2.ToString() + "_" + i.ToString();
+                    int price = _rand.Next(500, 10000);
+                    string type = Type[_rand.Next(0, 1)];
+                    audits.Add(new Audit(auditID, price, dateS, type));
+                }
+
+
+                #endregion
+
+                #region GenerowanieLektora
+                for (int i = 0; i < MainWindow.numOfLectors; i++ )
+                {
+                    List<string> firstNames = File.ReadAllLines(FirstNames).ToList();
+                    List<string> lastNames = File.ReadAllLines(LastNames).ToList();
+
+                    long PESEL = Utilities.peselGenerator();
+                    string firstName = firstNames[_rand.Next(0, firstNames.Count())];
+                    string lastName = lastNames[_rand.Next(0, lastNames.Count())];
+                    string department = IDOfDepartment[_rand.Next(0, IDOfDepartment.Count())];
+                    string language = Languages[_rand.Next(0, Languages.Count())];
+
+                    lectors.Add(new Lector(PESEL, firstName, lastName, department, language));
+
+                }
+
+
+                #endregion
+
+                    writeDataBase(false);
+
             }
-
-            #region GenerowanieDat
-
-            int dayT1 = int.Parse(MainWindow.T1Date.Substring(0, 2));
-            int monthT1 = int.Parse(MainWindow.T1Date.Substring(3, 2));
-            int yearT1 = int.Parse(MainWindow.T1Date.Substring(6, 4));
-
-            int dayT2 = int.Parse(MainWindow.T2Date.Substring(0, 2));
-            int monthT2 = int.Parse(MainWindow.T2Date.Substring(3, 2));
-            int yearT2 = int.Parse(MainWindow.T2Date.Substring(6, 4));
-
-            Tuple<int, int, int> date0 = Tuple.Create(2003, 1, 1);
-            Tuple<int, int, int> date1 = Tuple.Create(yearT1, monthT1, dayT1);
-            Tuple<int, int, int> date2 = Tuple.Create(yearT2, monthT2, dayT2);
-
-            for (int i = 0; i < MainWindow.numOfAudits; i++ )
-            {
-                var date = Utilities.GeneratedDate(date0, date1);
-                string dateS = date.Item1.ToString() + "." + date.Item2.ToString() + "." + date.Item3.ToString();
-                string auditID = "AUD_" + IDLanguages[_rand.Next(0, 7)] + "_" + date.Item2.ToString() + "_" + i.ToString();
-                int price = _rand.Next(500, 10000);
-                string type = Type[_rand.Next(0, 1)];
-                audits.Add(new Audit(auditID, price, dateS, type));
-            }
-
-
             #endregion
 
-                writeDataBase(false);
+            #region T2
+            else
+            {
+                // Smuteczek generowanie daty nie działa poprawnie :( 
+                #region GenerowanieAudytu2               
+
+                for (int i = 0; i < MainWindow.numOfAudits; i++)
+                {                   
+                    var date = Utilities.GeneratedDate(date1, date2);
+                    string dateS = date.Item1.ToString() + "." + date.Item2.ToString() + "." + date.Item3.ToString();
+                    string auditID = "AUD_" + IDLanguages[_rand.Next(0, 7)] + "_" + date.Item2.ToString() + "_" + i.ToString();
+                    int price = _rand.Next(500, 10000);
+                    string type = Type[_rand.Next(0, 1)];
+                    audits.Add(new Audit(auditID, price, dateS, type));
+                }
+
+
+                #endregion
+
+                #region GenerowanieLektora2
+                for (int i = 0; i < MainWindow.numOfLectors2; i++)
+                {
+                    List<string> firstNames = File.ReadAllLines(FirstNames).ToList();
+                    List<string> lastNames = File.ReadAllLines(LastNames).ToList();
+
+                    long PESEL = Utilities.peselGenerator();
+                    string firstName = firstNames[_rand.Next(0, firstNames.Count())];
+                    string lastName = lastNames[_rand.Next(0, lastNames.Count())];
+                    string department = IDOfDepartment[_rand.Next(0, IDOfDepartment.Count())];
+                    string language = Languages[_rand.Next(0, Languages.Count())];
+
+                    lectors.Add(new Lector(PESEL, firstName, lastName, department, language));
+
+                }
+
+
+                #endregion
+
+
+                writeDataBase(true);
+            }
+
+            #endregion
+         
         }
 
         private static void writeDataBase(bool update)
         {
             // Tabela języki - działa :D
-            using (var jezyk = new StreamWriter(DataBaseBulkPath + @"\Jezyki" + (update ? "Update" : "") + ".bulk"))
+            using (var jezyk = new StreamWriter(DataBaseBulkPath + @"\Jezyki" + ".bulk"))
                 foreach (string language in Languages)
                     jezyk.WriteLine(language);
 
             // Tabela filie - działa pięknie :D
-            using (var filia = new StreamWriter(DataBaseBulkPath + @"\Filie" + (update ? "Update" : "") + ".bulk"))
+            using (var filia = new StreamWriter(DataBaseBulkPath + @"\Filie" + ".bulk"))
                 foreach (Department department in departments)
                     filia.WriteLine(department.DepartmentNr.ToString() + " | " + department.Adress.ToString());
 
             //Tabela możeAudyt - 
-            using (var mozeAudyt = new StreamWriter(DataBaseBulkPath + @"\MozeAudyt" + (update ? "Update" : "") + ".bulk"))
+            using (var mozeAudyt = new StreamWriter(DataBaseBulkPath + @"\MozeAudyt" + ".bulk"))
                 foreach (CanAudit canAudit in canAudits)
                     mozeAudyt.WriteLine(canAudit.DepartmentNr.ToString() + " | " + canAudit.Name.ToString());
             //Tabela Audyt
             using (var audyt = new StreamWriter(DataBaseBulkPath + @"\Audyt" + (update ? "Update" : "") + ".bulk"))
                 foreach (Audit audit in audits)
                     audyt.WriteLine(audit.AuditNr.ToString() + " | " + audit.Date.ToString() + " | " + audit.Price.ToString() + " | " + audit.Type.ToString());
-
+            //Tabela Firma
+            using (var firma = new StreamWriter(DataBaseBulkPath + @"\Firma" + (update ? "Update" : "") + ".bulk"))
+                foreach (Buisness business in businesses)
+                    firma.WriteLine(business.NIP.ToString() + " | " + business.Name.ToString() + " | " + business.Adress.ToString() + " | " + business.Trade.ToString() + " | " + business.WorkersNumber.ToString());
+            //Tabela Lektor
+            using (var lektor = new StreamWriter(DataBaseBulkPath + @"\Lektor" + (update ? "Update" : "") + ".bulk"))
+                foreach (Lector lector in lectors)
+                    lektor.WriteLine(lector.PESEL.ToString() + " | " + lector.FirstName.ToString() + " | " + lector.LastName.ToString() + " | " + lector.Department.ToString() + " | " + lector.Language.ToString());
+            //Tabela Kurs
+            using (var kurs = new StreamWriter(DataBaseBulkPath + @"\Kurs" + (update ? "Update" : "") + ".bulk"))
+                foreach (Course course in courses)
+                    kurs.WriteLine(course.ID.ToString() + " | " + course.Language.ToString() + " | " + course.NrOfStudents.ToString() + " | " + course.Status.ToString());
         }
 
 
 
-      
+
     }
 }
