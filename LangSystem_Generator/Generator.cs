@@ -209,7 +209,7 @@ namespace LangSystem_Generator
 
                         courses.Add(new Course(courseID, language, numOfStudents, status));
                     }
-                    courseCounter = i;
+                    courseCounter = auditCounter + 1;
                 }
 
                 #endregion
