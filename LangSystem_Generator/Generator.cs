@@ -105,6 +105,8 @@ namespace LangSystem_Generator
             List<string> buisnessNames = File.ReadAllLines(BuisnessNames).ToList();
             List<string> tradehNames = File.ReadAllLines(TradehNames).ToList();
 
+            int auditCounter = 0;
+
             #region T1
             if (!update)
             {
@@ -145,15 +147,15 @@ namespace LangSystem_Generator
                 {
                     var date = Utilities.GeneratedDate(date0, date1);
                     string dateS = date.Item1.ToString() + "." + date.Item2.ToString() + "." + date.Item3.ToString();
-                    string auditID = "AUD_" + IDLanguages[_rand.Next(0, 7)] + "_" + date.Item2.ToString() + "_" + i.ToString();
+                    string auditID = departments[_rand.Next(0,departments.Count())].DepartmentNr + "_AUD_" + auditCounter++.ToString();
                     int price = _rand.Next(500, 10000);
-                    string type = Type[_rand.Next(0, 1)];
+                    string type = Type[_rand.Next() % 2];
                     audits.Add(new Audit(auditID, price, dateS, type));
                 }
 
 
                 #endregion
-
+                // Pesel nie działa
                 #region GenerowanieLektora
                 for (int i = 0; i < MainWindow.numOfLectors; i++ )
                 {
@@ -172,7 +174,7 @@ namespace LangSystem_Generator
 
 
                 #endregion
-
+                // NIP nie działa
                 #region GenerowanieFirm
 
                 for(int i=0; i < MainWindow.numOfBusiness; i++)
@@ -192,6 +194,41 @@ namespace LangSystem_Generator
                 #endregion
 
 
+                #region GenerowanieKursów
+
+                foreach (Audit audit in audits)
+                {
+                    counter = _rand.Next() % 4;
+                    bool end = false;
+
+                    for(int i = 0 ; i < counter; i++)
+                    {
+                        string courseID = audit.AuditNr + "_K" + i+1.ToString();
+                        string language = Languages[_rand.Next(0, Languages.Count())];
+                        int numOfStudents = _rand.Next(5, 550);
+                        string status = Status[_rand.Next() % 2];
+
+                        courses.Add(new Course(courseID, language, numOfStudents, status));
+
+                        MainWindow.numOfCourses--;
+                        if(MainWindow.numOfCourses == 0)
+                        {
+                            end = true;
+                            break;
+                        }
+
+                        if(end)
+                            break;
+                    }
+
+                }
+
+
+
+                #endregion
+
+
+
                     writeDataBase(false);
 
             }
@@ -207,15 +244,15 @@ namespace LangSystem_Generator
                 {                   
                     var date = Utilities.GeneratedDate(date1, date2);
                     string dateS = date.Item1.ToString() + "." + date.Item2.ToString() + "." + date.Item3.ToString();
-                    string auditID = "AUD_" + IDLanguages[_rand.Next(0, 7)] + "_" + date.Item2.ToString() + "_" + i.ToString();
+                    string auditID = departments[_rand.Next(0, departments.Count())].DepartmentNr + "_AUD_" + auditCounter++.ToString();
                     int price = _rand.Next(500, 10000);
-                    string type = Type[_rand.Next(0, 1)];
+                    string type = Type[_rand.Next() % 2];
                     audits.Add(new Audit(auditID, price, dateS, type));
                 }
 
 
                 #endregion
-
+                //Pesel nie działa
                 #region GenerowanieLektora2
                 for (int i = 0; i < MainWindow.numOfLectors2; i++)
                 {
@@ -234,7 +271,7 @@ namespace LangSystem_Generator
 
 
                 #endregion
-
+                // NIP nie działa 
                 #region GenerowanieFirm2
 
                 for (int i = 0; i < MainWindow.numOfBusiness; i++)
@@ -251,6 +288,36 @@ namespace LangSystem_Generator
 
 
 
+                #endregion
+
+                #region GenerowanieKursów
+
+                foreach (Audit audit in audits)
+                {
+                    int counter = _rand.Next() % 4;
+                    bool end = false;
+
+                    for (int i = 0; i < counter; i++)
+                    {
+                        string courseID = audit.AuditNr + "_K" + i+1.ToString();
+                        string language = Languages[_rand.Next(0, Languages.Count())];
+                        int numOfStudents = _rand.Next(5, 550);
+                        string status = Status[_rand.Next() % 2];
+
+                        courses.Add(new Course(courseID, language, numOfStudents, status));
+
+                        MainWindow.numOfCourses--;
+                        if (MainWindow.numOfCourses == 0)
+                        {
+                            end = true;
+                            break;
+                        }
+
+                        if (end)
+                            break;
+                    }
+
+                }
                 #endregion
 
 
