@@ -69,6 +69,12 @@ namespace LangSystem_Generator
             "Profilowany"
         };
 
+        private static readonly List<string> Status = new List<string>
+        {
+            "Sprzedany",
+            "Niesprzedany"
+        };
+
         private static readonly string DataBaseBulkPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location);
 
         private static List<Department> departments = new List<Department>();
@@ -76,7 +82,7 @@ namespace LangSystem_Generator
         private static List<Audit> audits = new List<Audit>();
         private static List<Lector> lectors = new List<Lector>();
         private static List<Course> courses = new List<Course>();
-        private static List<Buisness> businesses = new List<Buisness>();
+        private static List<Buisness> buisnesses = new List<Buisness>();
 
         public static void generateDataBase(bool update)
         {
@@ -93,13 +99,18 @@ namespace LangSystem_Generator
             Tuple<int, int, int> date0 = Tuple.Create(2003, 1, 1);
             Tuple<int, int, int> date1 = Tuple.Create(yearT1, monthT1, dayT1);
             Tuple<int, int, int> date2 = Tuple.Create(yearT2, monthT2, dayT2);
+
+            List<string> streets = File.ReadAllLines(Streets).ToList();
+            List<string> cities = File.ReadAllLines(Cities).ToList();
+            List<string> buisnessNames = File.ReadAllLines(BuisnessNames).ToList();
+            List<string> tradehNames = File.ReadAllLines(TradehNames).ToList();
+
             #region T1
             if (!update)
             {
                 #region GenerowanieFilii
                 // Na podstawie tych dwóch list będziemy tworzyć adres XD
-                List<string> streets = File.ReadAllLines(Streets).ToList();
-                List<string> cities = File.ReadAllLines(Cities).ToList();
+                
 
                 int counter = 1;
 
@@ -149,7 +160,7 @@ namespace LangSystem_Generator
                     List<string> firstNames = File.ReadAllLines(FirstNames).ToList();
                     List<string> lastNames = File.ReadAllLines(LastNames).ToList();
 
-                    long PESEL = Utilities.peselGenerator();
+                    long PESEL = Utilities.PESELGenerator();
                     string firstName = firstNames[_rand.Next(0, firstNames.Count())];
                     string lastName = lastNames[_rand.Next(0, lastNames.Count())];
                     string department = IDOfDepartment[_rand.Next(0, IDOfDepartment.Count())];
@@ -161,6 +172,25 @@ namespace LangSystem_Generator
 
 
                 #endregion
+
+                #region GenerowanieFirm
+
+                for(int i=0; i < MainWindow.numOfBusiness; i++)
+                {  
+                    string NIP = Utilities.NIPGenerator();
+                    string name = buisnessNames[_rand.Next(0, buisnessNames.Count())];
+                    string adress = cities[_rand.Next(0, cities.Count())].ToString() + ", " + streets[_rand.Next(0, streets.Count())].ToString() + " " + _rand.Next(1, 513).ToString();
+                    string trade = tradehNames[_rand.Next(0, tradehNames.Count())];
+                    int numOfWorkers = _rand.Next(5, 1000);
+
+                    buisnesses.Add(new Buisness(NIP, name, adress, trade, numOfWorkers));
+                   
+                }
+
+
+
+                #endregion
+
 
                     writeDataBase(false);
 
@@ -192,7 +222,7 @@ namespace LangSystem_Generator
                     List<string> firstNames = File.ReadAllLines(FirstNames).ToList();
                     List<string> lastNames = File.ReadAllLines(LastNames).ToList();
 
-                    long PESEL = Utilities.peselGenerator();
+                    long PESEL = Utilities.PESELGenerator();
                     string firstName = firstNames[_rand.Next(0, firstNames.Count())];
                     string lastName = lastNames[_rand.Next(0, lastNames.Count())];
                     string department = IDOfDepartment[_rand.Next(0, IDOfDepartment.Count())];
@@ -201,6 +231,24 @@ namespace LangSystem_Generator
                     lectors.Add(new Lector(PESEL, firstName, lastName, department, language));
 
                 }
+
+
+                #endregion
+
+                #region GenerowanieFirm2
+
+                for (int i = 0; i < MainWindow.numOfBusiness; i++)
+                {
+                    string NIP = Utilities.NIPGenerator();
+                    string name = buisnessNames[_rand.Next(0, buisnessNames.Count())];
+                    string adress = cities[_rand.Next(0, cities.Count())].ToString() + ", " + streets[_rand.Next(0, streets.Count())].ToString() + " " + _rand.Next(1, 513).ToString();
+                    string trade = tradehNames[_rand.Next(0, tradehNames.Count())];
+                    int numOfWorkers = _rand.Next(5, 1000);
+
+                    buisnesses.Add(new Buisness(NIP, name, adress, trade, numOfWorkers));
+
+                }
+
 
 
                 #endregion
@@ -235,7 +283,7 @@ namespace LangSystem_Generator
                     audyt.WriteLine(audit.AuditNr.ToString() + " | " + audit.Date.ToString() + " | " + audit.Price.ToString() + " | " + audit.Type.ToString());
             //Tabela Firma
             using (var firma = new StreamWriter(DataBaseBulkPath + @"\Firma" + (update ? "Update" : "") + ".bulk"))
-                foreach (Buisness business in businesses)
+                foreach (Buisness business in buisnesses)
                     firma.WriteLine(business.NIP.ToString() + " | " + business.Name.ToString() + " | " + business.Adress.ToString() + " | " + business.Trade.ToString() + " | " + business.WorkersNumber.ToString());
             //Tabela Lektor
             using (var lektor = new StreamWriter(DataBaseBulkPath + @"\Lektor" + (update ? "Update" : "") + ".bulk"))

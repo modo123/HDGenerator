@@ -61,7 +61,7 @@ namespace LangSystem_Generator
             return Tuple.Create(rok, miesiac, dzien);
         }
 
-        public static long peselGenerator()
+        public static long PESELGenerator()
         {
             Random _random = new Random();
             int year = _random.Next(62, 92);
@@ -85,6 +85,20 @@ namespace LangSystem_Generator
                 pesel = pesel + day.ToString() + rest.ToString();
 
             return long.Parse(pesel);
+        }
+
+        public static string NIPGenerator()
+        {
+            string NIP;
+            Random _random = new Random();
+            int part1 = _random.Next(100, 999);
+            int part2 = _random.Next(10, 99);
+            int part3 = _random.Next(10, 99);
+            int part4 = _random.Next(100, 999);
+
+            NIP = part1.ToString() + "-" + part2.ToString() + "-" + part3.ToString() + "-" + part4.ToString();
+
+            return NIP;
         }
     }
 }
