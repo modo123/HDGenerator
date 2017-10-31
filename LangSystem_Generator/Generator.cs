@@ -85,6 +85,8 @@ namespace LangSystem_Generator
         private static List<Buisness> buisnesses = new List<Buisness>();
 
         protected static int auditCounter = 0;
+        protected static int courseCounter = 0;
+
 
         public static void generateDataBase(bool update)
         {
@@ -110,7 +112,7 @@ namespace LangSystem_Generator
             List<string> lastNames = File.ReadAllLines(LastNames).ToList();
 
             int counter = 1;
-
+            
             #region T1
             if (!update)
             {
@@ -194,19 +196,20 @@ namespace LangSystem_Generator
 
                 #region GenerowanieKursów
 
-                foreach (Audit audit in audits)
-                {                    
+                for (int i = 0; i < auditCounter; i++ )
+                {
                     counter = _rand.Next() % 4;
 
-                    for (int i = 1; i <= counter; i++)
+                    for (int j = 1; j <= counter; j++)
                     {
-                        string courseID = audit.AuditNr + "_K" + i.ToString();
+                        string courseID = audits[i].AuditNr + "_K" + j.ToString();
                         string language = Languages[_rand.Next(0, Languages.Count())];
                         int numOfStudents = _rand.Next(5, 550);
                         string status = Status[_rand.Next() % 2];
 
                         courses.Add(new Course(courseID, language, numOfStudents, status));
                     }
+                    courseCounter = i;
                 }
 
                 #endregion
@@ -271,20 +274,20 @@ namespace LangSystem_Generator
 
                 #region GenerowanieKursów
 
-               foreach (Audit audit in audits)
-                {                    
-                    counter = _rand.Next() % 4;                  
+                for (int i = courseCounter; i < auditCounter; i++)
+                {
+                    counter = _rand.Next() % 4;
 
-                    for(int i = 1 ; i <= counter; i++)
+                    for (int j = 1; j <= counter; j++)
                     {
-                        string courseID = audit.AuditNr + "_K" + i.ToString();
+                        string courseID = audits[i].AuditNr + "_K" + j.ToString();
                         string language = Languages[_rand.Next(0, Languages.Count())];
                         int numOfStudents = _rand.Next(5, 550);
                         string status = Status[_rand.Next() % 2];
 
                         courses.Add(new Course(courseID, language, numOfStudents, status));
                     }
-               
+
 
                 }
                 #endregion
