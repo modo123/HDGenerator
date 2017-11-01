@@ -12,29 +12,29 @@ namespace LangSystem_Generator
         public static Tuple<int, int, int> GeneratedDate(Tuple<int, int, int> date1, Tuple<int, int, int> date2)
         {
          
-            Random _random = new Random(); // ToDo - rand nie losuje :(
+            //Random Generator._rand = new Random(); // ToDo - rand nie losuje :(
             
-            var rok = _random.Next(date1.Item1, date2.Item1);
+            var rok = Generator._rand.Next(date1.Item1, date2.Item1);
             ////////////////////////////////////////////////////////
             int miesiac;
             if (rok == date2.Item1)
             {
                 if (rok == date1.Item1)
                 {
-                    miesiac = _random.Next(date1.Item2, date2.Item2);
+                    miesiac = Generator._rand.Next(date1.Item2, date2.Item2);
                 }
                 else
                 {
-                    miesiac = _random.Next(1, date2.Item2);
+                    miesiac = Generator._rand.Next(1, date2.Item2);
                 }
             }
             else if (rok == date1.Item1)
             {
-                miesiac = _random.Next(date1.Item2, 12);
+                miesiac = Generator._rand.Next(date1.Item2, 12);
             }
             else
             {
-                miesiac = _random.Next(1, 12);
+                miesiac = Generator._rand.Next(1, 12);
             }
             ////////////////////////////////////////////////////////
             int dzien;
@@ -42,20 +42,20 @@ namespace LangSystem_Generator
             {
                 if (rok == date1.Item1 && miesiac == date1.Item2)
                 {
-                    dzien = _random.Next(date1.Item3, date2.Item3);
+                    dzien = Generator._rand.Next(date1.Item3, date2.Item3);
                 }
                 else
                 {
-                    dzien = _random.Next(1, date2.Item3);
+                    dzien = Generator._rand.Next(1, date2.Item3);
                 }
             }
             else if (rok == date1.Item1 && miesiac == date1.Item2)
             {
-                dzien = _random.Next(date1.Item3, DateTime.DaysInMonth(rok, miesiac));
+                dzien = Generator._rand.Next(date1.Item3, DateTime.DaysInMonth(rok, miesiac));
             }
             else
             {
-                dzien = _random.Next(1, DateTime.DaysInMonth(rok, miesiac));
+                dzien = Generator._rand.Next(1, DateTime.DaysInMonth(rok, miesiac));
             }
 
             return Tuple.Create(rok, miesiac, dzien);
@@ -63,16 +63,16 @@ namespace LangSystem_Generator
 
         public static long PESELGenerator()
         {
-            Random _random = new Random();
-            int year = _random.Next(62, 92);
-            int month = _random.Next(1, 12);
+            //Random Generator._rand = new Random();
+            int year = Generator._rand.Next(62, 92);
+            int month = Generator._rand.Next(1, 12);
             int day;
             if(month == 2)
-                day = _random.Next(1,28);
+                day = Generator._rand.Next(1,28);
             else 
-                day = _random.Next(1,31);
+                day = Generator._rand.Next(1,31);
 
-            int rest = _random.Next(10000, 99999);
+            int rest = Generator._rand.Next(10000, 99999);
             string pesel;
             if (month < 10)
                 pesel = year.ToString() + "0" + month.ToString();
@@ -90,11 +90,11 @@ namespace LangSystem_Generator
         public static string NIPGenerator()
         {
             string NIP;
-            Random _random = new Random();
-            int part1 = _random.Next(100, 999);
-            int part2 = _random.Next(10, 99);
-            int part3 = _random.Next(10, 99);
-            int part4 = _random.Next(100, 999);
+            //Random Generator._rand = new Random();
+            int part1 = Generator._rand.Next(100, 999);
+            int part2 = Generator._rand.Next(10, 99);
+            int part3 = Generator._rand.Next(10, 99);
+            int part4 = Generator._rand.Next(100, 999);
 
             NIP = part1.ToString() + "-" + part2.ToString() + "-" + part3.ToString() + "-" + part4.ToString();
 

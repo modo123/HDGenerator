@@ -23,8 +23,8 @@ namespace LangSystem_Generator
         public MainWindow()
         {
             InitializeComponent();
-        }
-
+        } 
+       
         public static string T1Date;
         public static string T2Date;
 
@@ -42,7 +42,7 @@ namespace LangSystem_Generator
         public static int numOfCourses2;
         public static int numOfLanguages2;
 
-
+     
         public void Generate_Click(object sender, RoutedEventArgs e)
         {
             if (!StartupCheck())
@@ -63,20 +63,20 @@ namespace LangSystem_Generator
                         NumOfBusiness2.IsEnabled = false;
                         NumOfLectors.IsEnabled = false;
                         NumOfLectors2.IsEnabled = false;
-                        //  NumofDepartaments.IsEnabled = false;
-                        // NumofDepartaments2.IsEnabled = false;
-                        // NumOfLanguages.IsEnabled = false;
-                        // NumOfLanguages2.IsEnabled = false;
+                      //  NumofDepartaments.IsEnabled = false;
+                       // NumofDepartaments2.IsEnabled = false;
+                       // NumOfLanguages.IsEnabled = false;
+                       // NumOfLanguages2.IsEnabled = false;
                         generate.IsEnabled = false;
                         T1.IsEnabled = false;
                         T2.IsEnabled = false;
 
                         InfoLabel.Content = "Proszę czekać";
                     });
-
+               
                 Generator.generateDataBase(false);
                 Generator.generateDataBase(true);
-
+          
                 Dispatcher.Invoke(
                     () =>
                     {
@@ -86,19 +86,19 @@ namespace LangSystem_Generator
                         NumOfBusiness2.IsEnabled = true;
                         NumOfLectors.IsEnabled = true;
                         NumOfLectors2.IsEnabled = true;
-                        // NumofDepartaments.IsEnabled = true;
-                        // NumofDepartaments2.IsEnabled = true;
-                        // NumOfLanguages.IsEnabled = true;
-                        // NumOfLanguages2.IsEnabled = true;
+                       // NumofDepartaments.IsEnabled = true;
+                       // NumofDepartaments2.IsEnabled = true;
+                       // NumOfLanguages.IsEnabled = true;
+                       // NumOfLanguages2.IsEnabled = true;
                         generate.IsEnabled = true;
                         T1.IsEnabled = true;
                         T2.IsEnabled = true;
-
+                        
                         InfoLabel.Content = "Zrobione";
                     });
             });
 
-
+            
         }
 
         public bool StartupCheck()
@@ -115,7 +115,7 @@ namespace LangSystem_Generator
                 return false;
             if (!int.TryParse(NumOfLectors2.Text, out numOfLectors2))
                 return false;
-            // if (!int.TryParse(NumofDepartaments.Text, out numofDepartaments))
+           // if (!int.TryParse(NumofDepartaments.Text, out numofDepartaments))
             //    return false;
             //if (!int.TryParse(NumofDepartaments2.Text, out numofDepartaments2))
             //    return false;
@@ -123,13 +123,13 @@ namespace LangSystem_Generator
             //    return false;
             //if (!int.TryParse(NumOfLanguages2.Text, out numOfLanguages2))
             //    return false;
-
+            
             T1Date = T1.Text;
             T2Date = T2.Text;
 
             return true;
         }
 
-
+    
     }
 }

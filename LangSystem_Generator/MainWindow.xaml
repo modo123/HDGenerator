@@ -10,13 +10,13 @@
         <TextBox x:Name="NumOfLectors" HorizontalAlignment="Left" Margin="110,45,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumOfBusiness" HorizontalAlignment="Left" Margin="110,80,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumOfAudits" HorizontalAlignment="Left" Margin="110,115,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
+        
 
-
-        <Label Content="Okresy czasu" HorizontalAlignment="Left" Margin="275,10,0,0" VerticalAlignment="Top" Height="30" />
-        <Label Content="T1" HorizontalAlignment="Left" Margin="250,57,0,0" VerticalAlignment="Top" Width="25" Height="30" />
-        <TextBox x:Name="T1" HorizontalAlignment="Left" Margin="300,57,0,0" VerticalAlignment="Top" Width="100" Height="30" Text="01.01.2005" SpellCheck.IsEnabled="True" RenderTransformOrigin="0.48,-0.633" />
-        <Label Content="T2" HorizontalAlignment="Left" Margin="250,97,0,0" VerticalAlignment="Top" Width="25" Height="30" />
-        <TextBox x:Name="T2" HorizontalAlignment="Left" Margin="300,97,0,0" VerticalAlignment="Top" Width="100" Height="30" Text="31.12.2017"  />
+        <Label Content="Okresy czasu" HorizontalAlignment="Left" Margin="275,38,0,0" VerticalAlignment="Top" Height="30" />
+        <Label Content="T1" HorizontalAlignment="Left" Margin="250,75,0,0" VerticalAlignment="Top" Width="25" Height="30" />
+        <TextBox x:Name="T1" HorizontalAlignment="Left" Margin="275,75,0,0" VerticalAlignment="Top" Width="100" Height="30" Text="01.01.2005" SpellCheck.IsEnabled="True" />
+        <Label Content="T2" HorizontalAlignment="Left" Margin="250,125,0,0" VerticalAlignment="Top" Width="25" Height="30" />
+        <TextBox x:Name="T2" HorizontalAlignment="Left" Margin="275,125,0,0" VerticalAlignment="Top" Width="100" Height="30" Text="31.12.2017"  />
 
         <Label Content="Zaktualizowane Dane" HorizontalAlignment="Left" Margin="475,8,0,0" VerticalAlignment="Top" Height="30" />
         <Label x:Name="Lectors2" Content="Lektorzy" HorizontalAlignment="Left" Margin="450,45,0,0" VerticalAlignment="Top" Width="75" Height="30" />
@@ -25,7 +25,7 @@
         <TextBox x:Name="NumOfLectors2" HorizontalAlignment="Left" Margin="525,45,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumOfBusiness2" HorizontalAlignment="Left" Margin="525,80,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
         <TextBox x:Name="NumOfAudits2" HorizontalAlignment="Left" Margin="525,115,0,0" VerticalAlignment="Top" Width="75" Height="30" Text="0" />
-
+        
 
         <Button x:Name="generate" Content="Generuj" Margin="525,195,40,137" Click="Generate_Click"/>
         <Label x:Name="InfoLabel" Content="" HorizontalAlignment="Left" Margin="50,259,0,0" VerticalAlignment="Top" Width="350" Height="75" FontSize="24" TextOptions.TextHintingMode="Animated"/>

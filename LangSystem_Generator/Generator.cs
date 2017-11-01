@@ -17,6 +17,7 @@ namespace LangSystem_Generator
         private static readonly string TradehNames = Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\branze.txt";
         private static readonly string Cities = Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\listamiast.txt";
         private static readonly string Streets = Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\ulice.txt";
+        //private static readonly string Ratings = Path.GetDirectoryName(Application.ResourceAssembly.Location) + @"\oceny.txt";
         private static readonly List<string> Languages = new List<string>
         {
             "Angielski",
@@ -75,6 +76,21 @@ namespace LangSystem_Generator
             "Niesprzedany"
         };
 
+        private static readonly List<string> Rating = new List<string>
+        {
+            "doskonała",
+            "dobra",
+            "średnia",
+            "słaba",
+            "zła"
+        };
+
+        private static readonly List<string> YesNo = new List<string>
+         {
+            "Tak",
+            "Nie"
+         };
+
         private static readonly string DataBaseBulkPath = System.IO.Path.GetDirectoryName(Application.ResourceAssembly.Location);
 
         private static List<Department> departments = new List<Department>();
@@ -83,15 +99,15 @@ namespace LangSystem_Generator
         private static List<Lector> lectors = new List<Lector>();
         private static List<Course> courses = new List<Course>();
         private static List<Buisness> buisnesses = new List<Buisness>();
+        private static List<Rating> ratings = new List<Rating>();
 
         protected static int auditCounter = 0;
         protected static int courseCounter = 0;
-
-
+        public static Random _rand = new Random(new DateTime().Millisecond);
+        
         public static void generateDataBase(bool update)
         {
-            Random _rand = new Random(new System.DateTime().Millisecond);
-
+            
             int dayT1 = int.Parse(MainWindow.T1Date.Substring(0, 2));
             int monthT1 = int.Parse(MainWindow.T1Date.Substring(3, 2));
             int yearT1 = int.Parse(MainWindow.T1Date.Substring(6, 4));
@@ -214,6 +230,29 @@ namespace LangSystem_Generator
 
                 #endregion
 
+                #region GenerowanieOcen
+
+                foreach (Audit audit in audits)
+                {
+
+                    string auditID = audit.AuditNr;
+                    for (int i = 0; i < _rand.Next(5, 250); i++)
+                    {
+                        string zaklocanie = YesNo[_rand.Next(0, YesNo.Count())];
+                        string wyjasnienieZ = YesNo[_rand.Next(0, YesNo.Count())];
+                        string wyjasnienieW = YesNo[_rand.Next(0, YesNo.Count())];
+                        string obiektywizm = Rating[_rand.Next(0, Rating.Count())];
+                        string profesjonalizm = Rating[_rand.Next(0, Rating.Count())];
+                        string komunikatywnosc = Rating[_rand.Next(0, Rating.Count())];
+                        string znajomosc = Rating[_rand.Next(0, Rating.Count())];
+
+                        ratings.Add(new Rating(auditID, zaklocanie, wyjasnienieZ, wyjasnienieW, obiektywizm, profesjonalizm, komunikatywnosc, znajomosc));
+                    }
+                }
+
+
+                #endregion
+
                 writeDataBase(false);
 
             }
@@ -241,6 +280,12 @@ namespace LangSystem_Generator
                 #region GenerowanieLektora2
                 for (int i = 0; i < MainWindow.numOfLectors2; i++)
                 {
+                    int tmp = _rand.Next(0, lectors.Count());
+                    for(int j = 0; j < tmp; j++)
+                    {
+                        lectors[_rand.Next(0, lectors.Count())].Department = IDOfDepartment[_rand.Next(0, departments.Count())].ToString();
+                    }
+
                     long PESEL = Utilities.PESELGenerator();
                     string firstName = firstNames[_rand.Next(0, firstNames.Count())];
                     string lastName = lastNames[_rand.Next(0, lastNames.Count())];
@@ -292,6 +337,29 @@ namespace LangSystem_Generator
                 }
                 #endregion
 
+                #region GenerowanieOcen
+                if (audits.Count() != 0)
+                {
+                    for (int i = courseCounter - 1; i < auditCounter; i++)
+                    {
+                        string auditID = audits[i].AuditNr;
+                        for (int j = 0; i < _rand.Next(5, 250); i++)
+                        {
+                            string zaklocanie = YesNo[_rand.Next(0, YesNo.Count())];
+                            string wyjasnienieZ = YesNo[_rand.Next(0, YesNo.Count())];
+                            string wyjasnienieW = YesNo[_rand.Next(0, YesNo.Count())];
+                            string obiektywizm = Rating[_rand.Next(0, Rating.Count())];
+                            string profesjonalizm = Rating[_rand.Next(0, Rating.Count())];
+                            string komunikatywnosc = Rating[_rand.Next(0, Rating.Count())];
+                            string znajomosc = Rating[_rand.Next(0, Rating.Count())];
+
+                            ratings.Add(new Rating(auditID, zaklocanie, wyjasnienieZ, wyjasnienieW, obiektywizm, profesjonalizm, komunikatywnosc, znajomosc));
+                        }
+                    }
+                }
+
+                #endregion
+
 
                 writeDataBase(true);
             }
@@ -332,6 +400,11 @@ namespace LangSystem_Generator
             using (var kurs = new StreamWriter(DataBaseBulkPath + @"\Kurs" + (update ? "Update" : "") + ".bulk"))
                 foreach (Course course in courses)
                     kurs.WriteLine(course.ID.ToString() + " | " + course.Language.ToString() + " | " + course.NrOfStudents.ToString() + " | " + course.Status.ToString());
+
+            //GenerowanieOcen do bulka
+            using (var ocena = new StreamWriter(DataBaseBulkPath + @"\Oceny" + (update ? "Update" : "") + ".bulk"))
+                foreach (Rating rating in ratings)
+                    ocena.WriteLine(rating.AuditID.ToString() + " | " + rating.zaklocaniePracy.ToString() + " | " + rating.wyjasnienieZadania.ToString() + " | " + rating.wyjasnieniaWatpliwosci.ToString() + " | " + rating.obiektywizm.ToString() + " | " + rating.profesjonalizm.ToString() + " | " + rating.komunikatywnosc.ToString() + " | " + rating.znajomoscDzialanosci.ToString());
         }
 
 

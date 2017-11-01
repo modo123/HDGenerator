@@ -37,3 +37,17 @@ E:\Semestr V Aplikacje\Hurtowanie Danych\Zadanie_2\LangSystem\HDGenerator\LangSy
 E:\Semestr V Aplikacje\Hurtowanie Danych\Zadanie_2\LangSystem\HDGenerator\LangSystem_Generator\bin\Debug\LangSystem_Generator.pdb
 E:\Semestr V Aplikacje\Hurtowanie Danych\Zadanie_2\LangSystem\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator.exe
 E:\Semestr V Aplikacje\Hurtowanie Danych\Zadanie_2\LangSystem\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator.pdb
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\bin\Debug\LangSystem_Generator.exe.config
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator.exe
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator.pdb
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\bin\Debug\LangSystem_Generator.exe
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\bin\Debug\LangSystem_Generator.pdb
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator.csprojResolveAssemblyReference.cache
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\MainWindow.baml
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\MainWindow.g.cs
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\App.g.cs
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator_MarkupCompile.cache
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator.g.resources
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator.Properties.Resources.resources
+C:\Users\ruchn\Desktop\777\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator.csproj.GenerateResource.Cache
+E:\Semestr V Aplikacje\Hurtowanie Danych\Zadanie_2\LangSystem\HDGenerator\LangSystem_Generator\obj\Debug\LangSystem_Generator.csproj.CoreCompileInputs.cache
