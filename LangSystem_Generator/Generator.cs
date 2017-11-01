@@ -402,9 +402,9 @@ namespace LangSystem_Generator
                     kurs.WriteLine(course.ID.ToString() + " | " + course.Language.ToString() + " | " + course.NrOfStudents.ToString() + " | " + course.Status.ToString());
 
             //GenerowanieOcen do bulka
-            using (var ocena = new StreamWriter(DataBaseBulkPath + @"\Oceny" + (update ? "Update" : "") + ".bulk"))
+            using (var ocena = new StreamWriter(DataBaseBulkPath + @"\Oceny" + (update ? "Update" : "") + ".csv"))
                 foreach (Rating rating in ratings)
-                    ocena.WriteLine(rating.AuditID.ToString() + " | " + rating.zaklocaniePracy.ToString() + " | " + rating.wyjasnienieZadania.ToString() + " | " + rating.wyjasnieniaWatpliwosci.ToString() + " | " + rating.obiektywizm.ToString() + " | " + rating.profesjonalizm.ToString() + " | " + rating.komunikatywnosc.ToString() + " | " + rating.znajomoscDzialanosci.ToString());
+                    ocena.WriteLine(rating.AuditID.ToString() + " , " + rating.zaklocaniePracy.ToString() + " , " + rating.wyjasnienieZadania.ToString() + " , " + rating.wyjasnieniaWatpliwosci.ToString() + " , " + rating.obiektywizm.ToString() + " , " + rating.profesjonalizm.ToString() + " , " + rating.komunikatywnosc.ToString() + " , " + rating.znajomoscDzialanosci.ToString());
         }
 
 
